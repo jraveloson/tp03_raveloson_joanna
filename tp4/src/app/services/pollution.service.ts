@@ -40,14 +40,11 @@ export class PollutionService {
     );
   }
 
-  public updatePollution(id: number, updated: Pollution): void {
-    const pollutions = this.pollutions$.getValue();
-    const index = pollutions.findIndex(p => p.id === id);
-
-    if (index !== -1) {
-      pollutions[index] = { ...updated, id };
-      this.pollutions$.next([...pollutions]);
-    }
+  public updatePollution(id: number, updated: Pollution): Observable<Pollution> {
+    return this.http.put<Pollution>(
+      `${this.apiUrl}/api/pollution/${id}`,
+      updated
+    );
   }
 
   public deletePollution(id: number): void {

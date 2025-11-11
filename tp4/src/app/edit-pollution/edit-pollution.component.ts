@@ -40,18 +40,24 @@ export class EditPollutionComponent {
   id!: number;
 
   ngOnInit(): void {
-    this.route.paramMap.pipe(
-      switchMap(params => {
-        this.id = Number(params.get('id'));
-        return this.pollutionService.getOne(this.id);
-      })
-    ).subscribe(pollution => {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if (!idParam || isNaN(Number(idParam))) {
+      console.error('ID invalide dans l’URL');
+      this.router.navigate(['/']);
+      return;
+    }
+    this.id = Number(idParam);
+
+    this.pollutionService.getOne(this.id).subscribe(pollution => {
       this.pollutionForm.patchValue(pollution!);
     });
   }
 
   onSubmit(): void {
-    this.pollutionService.updatePollution(this.id, this.pollutionForm.value as Pollution);
-    this.router.navigate(['/pollutions']);
+    this.pollutionService.updatePollution(this.id, this.pollutionForm.value)
+      .subscribe({
+        next: () => this.router.navigate(['/']),
+        error: (err) => console.error(err)
+      });
   }
 }
