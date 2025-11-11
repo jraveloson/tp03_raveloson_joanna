@@ -8,14 +8,14 @@
 
     <p>
         Type :
-        <select formControlName="type">
+        <select formControlName="type_pollution">
             <option value="">-- Sélectionnez --</option>
-            <option value="plastique">Plastique</option>
-            <option value="chimique">Chimique</option>
-            <option value="depot sauvage">Dépôt sauvage</option>
-            <option value="eau">Eau</option>
-            <option value="air">Air</option>
-            <option value="autre">Autre</option>
+            <option value="Plastique">Plastique</option>
+            <option value="Chimique">Chimique</option>
+            <option value="Dépôt sauvage">Dépôt sauvage</option>
+            <option value="Eau">Eau</option>
+            <option value="Air">Air</option>
+            <option value="Autre">Autre</option>
         </select>
     </p>
 
@@ -26,7 +26,7 @@
 
     <p>
         Date :
-        <input type="date" formControlName="date" />
+        <input type="date" formControlName="date_observation" />
     </p>
 
     <p>
@@ -46,7 +46,7 @@
 
     <p>
         Photo :
-        <input type="url" formControlName="photo" placeholder="URL de la photo" />
+        <input type="url" formControlName="photo_url" placeholder="URL de la photo" />
     </p>
 
     <button type="submit" [disabled]="pollutionForm.invalid">Déclarer</button>

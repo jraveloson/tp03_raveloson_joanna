@@ -16,9 +16,9 @@ export class AddPollutionComponent {
   constructor(private fb: FormBuilder, private pollutionService: PollutionService, private router: Router) {
     this.pollutionForm = this.fb.group({
       titre: ['', Validators.required],
-      type: ['', Validators.required],
+      type_pollution: ['', Validators.required],
       description: ['', Validators.required],
-      date: ['', Validators.required],
+      date_observation: ['', Validators.required],
       lieu: ['', Validators.required],
       latitude: [
         null,
@@ -28,14 +28,20 @@ export class AddPollutionComponent {
         null,
         [Validators.required, Validators.min(-180), Validators.max(180)]
       ],
-      photo: ['']
+      photo_url: ['']
     });
   }
 
   onSubmit() {
     if (this.pollutionForm.valid) {
-      this.pollutionService.addPollution(this.pollutionForm.value);
-      this.router.navigate(['/pollutions']);
+      this.pollutionService.addPollution(this.pollutionForm.value).subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          alert('Erreur lors de la création de la pollution: ' + err.message);
+        }
+      });
     }
   }
 }
