@@ -25,16 +25,14 @@ export class PollutionService {
     return this.pollutions$.asObservable();
   }
 
+  public getOne(id: number): Observable<Pollution> {
+    return this.http.get<Pollution>(`${this.apiUrl}/api/pollution/${id}`);
+  }
+
   public addPollution(pollution: Pollution): void {
     const currentPollutions = this.pollutions$.getValue();
     pollution.id = currentPollutions.length + 1;
     this.pollutions$.next([...currentPollutions, pollution]);
-  }
-
-  public getOne(id: number): Observable<Pollution> {
-    return this.pollutions$.pipe(
-      map(list => list.find(p => p.id === id) as Pollution)
-    );
   }
 
   public updatePollution(id: number, updated: Pollution): void {

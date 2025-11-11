@@ -23,12 +23,10 @@ export class DetailsPollutionComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.pollution$ = this.route.paramMap.pipe(
-      map(params => Number(params.get('id'))),
-      switchMap(id => this.pollutionService.getOne(id))
-    );
+    this.route.params.subscribe((params) => {
+      const pollutionId = params['id'];
+      this.pollution$ = this.pollutionService.getOne(pollutionId);
+    });
   }
-
-
 
 }
