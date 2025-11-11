@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tp3": {
+    "tp4": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tp3",
+            "outputPath": "dist/tp4",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "tp3:build:production"
+              "buildTarget": "tp4:build:production"
             },
             "development": {
-              "buildTarget": "tp3:build:development"
+              "buildTarget": "tp4:build:development"
             }
           },
           "defaultConfiguration": "development"
