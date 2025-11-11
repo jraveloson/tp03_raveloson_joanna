@@ -8,6 +8,7 @@ import { Pollution } from '../models/pollution.model';
   providedIn: 'root'
 })
 export class PollutionService {
+  private apiUrl = 'https://templateweb-latest-00ck.onrender.com';
   private pollutions$ = new BehaviorSubject<Pollution[]>([]);
 
   constructor(private http: HttpClient) {
@@ -15,7 +16,7 @@ export class PollutionService {
   }
 
   private loadInitialData(): void {
-    this.http.get<Pollution[]>('assets/pollution.json').subscribe(data => {
+    this.http.get<Pollution[]>(`${this.apiUrl}/api/pollution`).subscribe(data => {
       this.pollutions$.next(data);
     });
   }

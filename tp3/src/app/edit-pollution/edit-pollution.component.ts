@@ -21,9 +21,9 @@ export class EditPollutionComponent {
     private pollutionService: PollutionService) {
     this.pollutionForm = this.fb.group({
       titre: ['', Validators.required],
-      type: ['', Validators.required],
+      type_pollution: ['', Validators.required],
       description: ['', Validators.required],
-      date: ['', Validators.required],
+      date_observation: ['', Validators.required],
       lieu: ['', Validators.required],
       latitude: [
         null,
@@ -33,7 +33,7 @@ export class EditPollutionComponent {
         null,
         [Validators.required, Validators.min(-180), Validators.max(180)]
       ],
-      photo: ['']
+      photo_url: ['']
     });
   }
 
