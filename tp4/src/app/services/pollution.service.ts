@@ -47,10 +47,8 @@ export class PollutionService {
     );
   }
 
-  public deletePollution(id: number): void {
-    const pollutions = this.pollutions$.getValue();
-    const newList = pollutions.filter(p => p.id !== id);
-    this.pollutions$.next(newList);
+  public deletePollution(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/api/pollution/${id}`);
   }
 
 

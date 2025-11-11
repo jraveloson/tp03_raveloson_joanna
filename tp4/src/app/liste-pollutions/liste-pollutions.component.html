@@ -14,8 +14,10 @@
 <ul *ngIf="pollutions$ | async as pollutions; else loading">
     <li *ngFor="let p of pollutions | filterByType:selectedType" [routerLink]="['/pollutions', p.id]">
         {{ p.titre }}
-        <button [routerLink]="['/pollutions/edit', p.id]">Modifier</button>
-        <button *ngIf="p.id !== undefined" (click)="delete(p.id)">Supprimer</button>
+        <button [routerLink]="['/pollutions/edit', p.id]" (click)="$event.stopPropagation()">Modifier</button>
+        <button type="button" *ngIf="p.id !== undefined" (click)="deletePollution(p.id!); $event.stopPropagation()">
+            Supprimer
+        </button>
     </li>
 </ul>
 

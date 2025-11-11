@@ -28,9 +28,15 @@ export class ListePollutionsComponent implements OnInit {
     this.pollutionService.addPollution(pollution);
   }
 
-  delete(id: number) {
-    this.pollutionService.deletePollution(id);
-    this.router.navigate(['/pollutions']);
+  deletePollution(id: number): void {
+    if (confirm('Voulez-vous vraiment supprimer cette pollution ?')) {
+      this.pollutionService.deletePollution(id).subscribe({
+        next: () => {
+          this.pollutions$ = this.pollutionService.getPollutions();
+        },
+        error: (err) => console.error('Erreur lors de la suppression :', err)
+      });
+    }
   }
-
 }
+
